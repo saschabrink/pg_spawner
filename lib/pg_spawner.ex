@@ -37,7 +37,11 @@ defmodule PgSpawner do
       {:ok, state}
     else
       :ok = ensure_initialized(pgdata)
-      Logger.info("[PgSpawner] Starting Postgres on port #{port_number} (logs: #{describe_log_file(log_file)})")
+
+      Logger.info(
+        "[PgSpawner] Starting Postgres on port #{port_number} (logs: #{describe_log_file(log_file)})"
+      )
+
       port = spawn_postgres(port_number, pgdata, log_file)
 
       case wait_ready(port_number, @ready_attempts) do
@@ -122,7 +126,9 @@ defmodule PgSpawner do
     pg_ctl = System.find_executable("pg_ctl")
 
     if pg_ctl do
-      System.cmd(pg_ctl, ["stop", "-D", pgdata, "-m", "fast", "-w", "-t", "10"], stderr_to_stdout: true)
+      System.cmd(pg_ctl, ["stop", "-D", pgdata, "-m", "fast", "-w", "-t", "10"],
+        stderr_to_stdout: true
+      )
     end
   end
 

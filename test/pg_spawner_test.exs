@@ -75,5 +75,4 @@ defmodule PgSpawnerTest do
       true
     end
   end
-
 end
