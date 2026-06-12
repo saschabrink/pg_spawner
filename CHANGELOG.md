@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1] - 2026-06-12
+
+### Changed
+- Repository moved to https://github.com/saschabrink/pg_spawner.
+- CI tests against Elixir 1.19 and 1.20 via the Nix flake dev shells.
+- README badges for Hex version, docs, CI status, and license.
+
 ## [0.1.0] - 2026-05-12
 
 ### Added

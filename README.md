@@ -1,5 +1,10 @@
 # PgSpawner
 
+[![Hex.pm](https://img.shields.io/hexpm/v/pg_spawner.svg)](https://hex.pm/packages/pg_spawner)
+[![Hexdocs](https://img.shields.io/badge/hex-docs-purple.svg)](https://hexdocs.pm/pg_spawner)
+[![CI](https://github.com/saschabrink/pg_spawner/actions/workflows/ci.yml/badge.svg)](https://github.com/saschabrink/pg_spawner/actions/workflows/ci.yml)
+[![License](https://img.shields.io/hexpm/l/pg_spawner.svg)](https://github.com/saschabrink/pg_spawner/blob/main/LICENSE)
+
 Zero-config local Postgres for Elixir. Add the dep, Postgres boots with your app and shuts down with it. Auto-initdb on first run, no PID files, no stale processes.
 
 ## Installation

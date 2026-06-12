@@ -1,8 +1,8 @@
 defmodule PgSpawner.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
-  @source_url "https://github.com/exfoundry/pg_spawner"
+  @version "0.1.1"
+  @source_url "https://github.com/saschabrink/pg_spawner"
 
   def project do
     [
