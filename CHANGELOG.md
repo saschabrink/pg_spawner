@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.2] - 2026-06-12
+
+### Fixed
+- A relative `:pgdata` path (e.g. the default `priv/db/data`) broke startup
+  since 0.1.1: it was passed verbatim as `unix_socket_directories`, which
+  Postgres resolves against its own working directory — failing with
+  `could not create lock file` and surfacing as `:postgres_start_timeout`.
+  `:pgdata` is now expanded to an absolute path on init.
+
 ## [0.1.1] - 2026-06-12
 
 ### Changed

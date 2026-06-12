@@ -28,7 +28,10 @@ defmodule PgSpawner do
   @impl true
   def init(opts) do
     port_number = Keyword.fetch!(opts, :port)
-    pgdata = Keyword.fetch!(opts, :pgdata)
+    # Expand to an absolute path: pgdata doubles as the unix socket directory
+    # (-k), which Postgres resolves relative to its own working directory —
+    # a relative path like "priv/db/data" would make it fail at startup.
+    pgdata = opts |> Keyword.fetch!(:pgdata) |> Path.expand()
     log_file = Keyword.get(opts, :log_file, Path.join(pgdata, "postgres.log"))
     state = %{port: nil, owner: false, port_number: port_number, pgdata: pgdata}
 

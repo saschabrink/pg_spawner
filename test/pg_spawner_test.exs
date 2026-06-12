@@ -33,6 +33,18 @@ defmodule PgSpawnerTest do
       assert tcp_open?(port), "Owner should still be running"
     end
 
+    # Regression: 0.1.1 passed pgdata verbatim as the unix socket directory
+    # (-k). With a relative path Postgres resolved it against its own working
+    # directory and died with "could not create lock file".
+    test "starts with a relative pgdata path", %{pgdata: pgdata, port: port} do
+      relative_pgdata = Path.relative_to(pgdata, File.cwd!())
+      refute Path.type(relative_pgdata) == :absolute
+
+      {:ok, pid} = start_spawner(port: port, pgdata: relative_pgdata)
+      assert tcp_open?(port), "Postgres should be listening on #{port}"
+      assert :sys.get_state(pid).owner == true
+    end
+
     test "runs initdb automatically when pgdata is empty", %{pgdata: pgdata, port: port} do
       refute File.exists?(Path.join(pgdata, "PG_VERSION"))
       {:ok, _pid} = start_spawner(port: port, pgdata: pgdata)
