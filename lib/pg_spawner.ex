@@ -69,8 +69,11 @@ defmodule PgSpawner do
 
     redirect = log_redirect(log_file)
 
+    # -k pins the unix socket to pgdata: the nixpkgs Linux build defaults to
+    # /run/postgresql, which doesn't exist (or isn't writable) on CI runners,
+    # making Postgres exit before it ever binds the TCP port.
     script = """
-    "$1" -D "$2" -p "$3" #{redirect} &
+    "$1" -D "$2" -p "$3" -k "$2" #{redirect} &
     PID=$!
     cat > /dev/null
     kill -TERM $PID 2>/dev/null

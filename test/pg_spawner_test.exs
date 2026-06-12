@@ -76,7 +76,4 @@ defmodule PgSpawnerTest do
     end
   end
 
-  defp capture_io_log(fun) do
-    ExUnit.CaptureLog.capture_log(fun)
-  end
 end

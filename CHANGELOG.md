@@ -7,6 +7,12 @@
 - CI tests against Elixir 1.19 and 1.20 via the Nix flake dev shells.
 - README badges for Hex version, docs, CI status, and license.
 
+### Fixed
+- Postgres now starts with `unix_socket_directories` pinned to the pgdata
+  directory. Linux builds that default the socket to `/run/postgresql`
+  (e.g. nixpkgs) previously died on startup when that directory wasn't
+  writable — surfacing as `:postgres_start_timeout`.
+
 ## [0.1.0] - 2026-05-12
 
 ### Added
